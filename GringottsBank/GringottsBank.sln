@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GringottsBank.Api", "src\GringottsBank.Api\GringottsBank.Api.csproj", "{6F36503A-D1A1-4D11-A3D1-1CDF624D48A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GringottsBank.Core", "src\GringottsBank.Core\GringottsBank.Core.csproj", "{E2D3DCEE-0203-4438-884B-EFA49D62130A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GringottsBank.Data", "src\GringottsBank.Data\GringottsBank.Data.csproj", "{6A5EEF65-AB93-4633-AD44-ECC7AD3E28A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GringottsBank.Application", "src\GringottsBank.Application\GringottsBank.Application.csproj", "{09B822D2-365B-4840-91E6-B2A83F88D000}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F36503A-D1A1-4D11-A3D1-1CDF624D48A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F36503A-D1A1-4D11-A3D1-1CDF624D48A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F36503A-D1A1-4D11-A3D1-1CDF624D48A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F36503A-D1A1-4D11-A3D1-1CDF624D48A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2D3DCEE-0203-4438-884B-EFA49D62130A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2D3DCEE-0203-4438-884B-EFA49D62130A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2D3DCEE-0203-4438-884B-EFA49D62130A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2D3DCEE-0203-4438-884B-EFA49D62130A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A5EEF65-AB93-4633-AD44-ECC7AD3E28A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A5EEF65-AB93-4633-AD44-ECC7AD3E28A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A5EEF65-AB93-4633-AD44-ECC7AD3E28A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A5EEF65-AB93-4633-AD44-ECC7AD3E28A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09B822D2-365B-4840-91E6-B2A83F88D000}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09B822D2-365B-4840-91E6-B2A83F88D000}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09B822D2-365B-4840-91E6-B2A83F88D000}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09B822D2-365B-4840-91E6-B2A83F88D000}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
