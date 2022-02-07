@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using GringottsBank.Api.Extensions;
 using GringottsBank.Application.Models.Account;
-using GringottsBank.Application.Services;
+using GringottsBank.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace GringottsBank.Api.Controllers
             _transactionService = transactionService;
         }
 
-        [ProducesResponseType(typeof(GetCustomerAccountsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CustomerBankAccountsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]

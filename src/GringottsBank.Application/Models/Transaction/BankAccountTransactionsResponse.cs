@@ -4,20 +4,17 @@ using GringottsBank.Core.Enums;
 
 namespace GringottsBank.Application.Models.Transaction
 {
-    public class CustomerTransactionsResponse
+    public class BankAccountTransactionsResponse
     {
         public Guid CustomerId { get; set; }
-        public List<CustomerTransaction> Transactions { get; set; }
+        public Guid AccountId { get; set; }
+        public List<BankAccountTransaction> Transactions { get; set; }
     }
     
-    public class CustomerTransaction
+    public class BankAccountTransaction
     {
         public TransactionType TransactionType { get; set; }
         public decimal Amount { get; set; }
         public DateTime CreateDate { get; set; }
-        public string AccountName { get; set; }
-        public Guid AccountId { get; set; }
     }
-
-  
 }

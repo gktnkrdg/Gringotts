@@ -1,5 +1,5 @@
 using System.Net;
-using GringottsBank.Application.Services;
+using GringottsBank.Application.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;

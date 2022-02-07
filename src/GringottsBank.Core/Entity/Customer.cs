@@ -9,6 +9,6 @@ namespace GringottsBank.Core.Entity
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Password { get; set; }
-        public IList<Account> Accounts { get; set; }
+        public IList<BankAccount> Accounts { get; set; }
     }
 }

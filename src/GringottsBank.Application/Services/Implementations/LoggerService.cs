@@ -3,15 +3,14 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using GringottsBank.Application.Services.Contracts;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace GringottsBank.Application.Services
+namespace GringottsBank.Application.Services.Implementations
 {
     public class LogService : ILogService
     {
-      
-
         private readonly ILogger _logger;
 
         public LogService(ILoggerFactory loggerFactory)
@@ -19,7 +18,7 @@ namespace GringottsBank.Application.Services
             _logger = loggerFactory.CreateLogger<LogService>();
         }
 
-       
+
         public async Task LogInformation(string message, Exception exception = null, string responseBody = null,
             string requestBody = null, HttpMethod httpMethod = null, HttpStatusCode? httpStatusCode = null,
             long? duration = null, string url = null, string origin = null, LogLevel logLevel = LogLevel.Information)

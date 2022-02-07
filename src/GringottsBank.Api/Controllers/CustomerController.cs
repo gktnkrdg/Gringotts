@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using GringottsBank.Api.Extensions;
 using GringottsBank.Application.Models.Account;
 using GringottsBank.Application.Models.Customer;
-using GringottsBank.Application.Services;
+using GringottsBank.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +21,7 @@ namespace GringottsBank.Api.Controllers
         {
             _customerService = customerService;
         }
-    
+
         [ProducesResponseType(typeof(CreateUserResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -29,18 +29,14 @@ namespace GringottsBank.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> CreateUser([FromBody] CreateCustomerCommand createUser)
         {
-            //todo validasyon
             var createUserResult = await _customerService.CreateCustomer(createUser);
-            //todo badrequest?
-            return Created("Create",null);
+            if (createUserResult.Success)
+                return Created("Create", createUserResult.Data);
+            return BadRequest(createUserResult.Message);
         }
-        
-        
-     
-        
-          
+
         [Route("me")]
-        [ProducesResponseType(typeof(List<GetCustomerAccountsResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<CustomerBankAccountsResponse>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]
@@ -53,6 +49,7 @@ namespace GringottsBank.Api.Controllers
             {
                 return NotFound();
             }
+
             return Ok(userResult);
         }
     }

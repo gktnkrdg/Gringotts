@@ -4,10 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace GringottsBank.Application.Services
+namespace GringottsBank.Application.Services.Contracts
 {
-    
-  
     public interface ILogService
     {
         Task LogInformation(string message, Exception exception = null, string responseBody = null,
