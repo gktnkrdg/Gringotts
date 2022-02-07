@@ -6,7 +6,6 @@ on:
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
   APP_NAME: ${{ 'gringotts-api' }}
-  HEROKU_REGISTRY_IMAGE: registry.heroku.com/${APP_NAME}/web
   
 
 jobs:
@@ -19,7 +18,6 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          heroku container:login
-          docker build --tag ${{ env.HEROKU_REGISTRY_IMAGE }}:latest .
-          docker push ${{ env.HEROKU_REGISTRY_IMAGE }}:latest
-          heroku container:release -a ${{ env.APP_NAME }} web
+          docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+          heroku container:push web -a $APP_NAME
+          heroku container:release web -a $APP_NAME
