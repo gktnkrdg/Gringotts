@@ -20,5 +20,5 @@ COPY --from=publish /app/publish .
 ##ENTRYPOINT ["dotnet", "GringottsBank.Api.dll"]
 
 ## heroku uses the following
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet GringottsBank.Api.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet /GringottsBank.Api
 
