@@ -15,4 +15,9 @@ RUN dotnet publish "GringottsBank.Api.csproj" -c Release -o /app/publish
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "GringottsBank.Api.dll"]
+##local
+##ENTRYPOINT ["dotnet", "GringottsBank.Api.dll"]
+
+## heroku uses the following
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet ringottsBank.Api.dll
+
