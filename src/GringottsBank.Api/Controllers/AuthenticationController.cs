@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using GringottsBank.Api.Handlers;
 using GringottsBank.Application.Models.Token;
@@ -28,9 +29,9 @@ namespace GringottsBank.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginCommand request)
         {
             var customerLoginResult = await _customerService.CheckCustomerLogin(request.Email, request.Password);
-            if(!customerLoginResult.Success)
+            if(!customerLoginResult.Success  || customerLoginResult.Data == null || customerLoginResult.Data.CustomerId == Guid.Empty )
                 return BadRequest(customerLoginResult.Message);
-
+            
             var tokenResult = _tokenHandler.CreateToken(customerLoginResult.Data.CustomerId);
             if (tokenResult?.Token == null)
                 return BadRequest();

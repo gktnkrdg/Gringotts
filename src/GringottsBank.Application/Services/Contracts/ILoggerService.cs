@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 
 namespace GringottsBank.Application.Services.Contracts
 {
-    public interface ILogService
+    public interface ILoggerService
     {
         Task LogInformation(string message, Exception exception = null, string responseBody = null,
             string requestBody = null,

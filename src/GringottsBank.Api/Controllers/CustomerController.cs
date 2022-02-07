@@ -31,12 +31,12 @@ namespace GringottsBank.Api.Controllers
         {
             var createUserResult = await _customerService.CreateCustomer(createUser);
             if (createUserResult.Success)
-                return Created("Create", createUserResult.Data);
+                return Created("", createUserResult.Data);
             return BadRequest(createUserResult.Message);
         }
 
         [Route("me")]
-        [ProducesResponseType(typeof(List<CustomerBankAccountsResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(CustomerResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]

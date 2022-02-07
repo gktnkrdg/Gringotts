@@ -25,7 +25,7 @@ namespace GringottsBank.Api.Controllers
         }
 
         [ProducesResponseType(typeof(CreateBankAccountResponse), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> CreateBankAccount([FromRoute]string accountName)
@@ -74,7 +74,7 @@ namespace GringottsBank.Api.Controllers
         }
 
         [Route("{bankAccountId}/deposit")]
-        [ProducesResponseType(typeof(CustomerBankAccountsResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateTransactionResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -82,36 +82,35 @@ namespace GringottsBank.Api.Controllers
         public async Task<IActionResult> CreateDeposit([FromRoute] Guid bankAccountId,[FromBody] DepositCommand command)
         {
             var customerId = HttpContext.User.CustomerId();
-            var accountResponse = await _bankAccountService.CreateDeposit(customerId,bankAccountId,command);
+            var createDeposit = await _bankAccountService.CreateDeposit(customerId,bankAccountId,command);
 
-            if (accountResponse == null)
+            if (!createDeposit.Success)
             {
-                return NotFound();
+                return BadRequest(createDeposit.Message);
             }
-            return Ok(accountResponse);
+            return Ok(createDeposit.Data);
         }
 
         [Route("{bankAccountId}/withdraw")]
-        [ProducesResponseType(typeof(CustomerBankAccountsResponse), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(CreateTransactionResponse), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public async Task<IActionResult> CreateTransaction([FromRoute] Guid bankAccountId,[FromBody] WithdrawCommand command)
+        public async Task<IActionResult> CreateWithdrawTransaction([FromRoute] Guid bankAccountId,[FromBody] WithdrawCommand command)
         {
             var customerId = HttpContext.User.CustomerId();
-            var accountResponse = await _bankAccountService.CreateWithdraw(customerId,bankAccountId,command);
+            var createWithdrawResult = await _bankAccountService.CreateWithdraw(customerId,bankAccountId,command);
 
-            if (accountResponse == null)
+            if (!createWithdrawResult.Success)
             {
-                return NotFound();
+                return BadRequest(createWithdrawResult.Message);
             }
-            return Ok(accountResponse);
+            return Ok(createWithdrawResult.Data);
         }
 
 
         [Route("{bankAccountId}/transactions")]
-        [ProducesResponseType(typeof(CustomerBankAccountsResponse), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(BankAccountTransactionsResponse), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpGet]

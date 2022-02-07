@@ -9,13 +9,13 @@ using Newtonsoft.Json;
 
 namespace GringottsBank.Application.Services.Implementations
 {
-    public class LogService : ILogService
+    public class LoggerService : ILoggerService
     {
         private readonly ILogger _logger;
 
-        public LogService(ILoggerFactory loggerFactory)
+        public LoggerService(ILoggerFactory loggerFactory)
         {
-            _logger = loggerFactory.CreateLogger<LogService>();
+            _logger = loggerFactory.CreateLogger<LoggerService>();
         }
 
 

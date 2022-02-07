@@ -13,7 +13,7 @@ namespace GringottsBank.Api.Middleware
     {
         public static void ConfigureExceptionHandler(this IApplicationBuilder app)
         {
-            var logger = app.ApplicationServices.GetRequiredService<ILogService>();
+            var logger = app.ApplicationServices.GetRequiredService<ILoggerService>();
 
             app.UseExceptionHandler(appError =>
             {
