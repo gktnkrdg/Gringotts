@@ -9,6 +9,8 @@ namespace GringottsBank.Core.Entity
         public decimal Balance { get; set; }
         public Guid CustomerId { get; set; }
         public Customer Customer { get; set; }
+        
+        public bool IsActive { get; set; }
         public uint ConcurrencyStamp { get; set; }
         public IList<Transaction> Transactions { get; set; }
     }

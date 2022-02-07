@@ -10,8 +10,6 @@ namespace GringottsBank.Data
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<AuditLog> AuditLogs { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

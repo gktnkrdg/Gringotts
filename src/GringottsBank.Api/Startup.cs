@@ -1,7 +1,13 @@
 using System;
+using System.Reflection;
 using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using GringottsBank.Api.Extensions;
 using GringottsBank.Api.Middleware;
+using GringottsBank.Api.Validators;
+using GringottsBank.Application.Models.Account;
+using GringottsBank.Application.Models.Customer;
 using GringottsBank.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -26,7 +32,11 @@ namespace GringottsBank.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddFluentValidation();
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            services.AddTransient<IValidator<CreateCustomerCommand>,CreateCustomerValidator>();
+            services.AddTransient<IValidator<CreateBankAccountCommand>,CreateBankAccountValidator >();
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

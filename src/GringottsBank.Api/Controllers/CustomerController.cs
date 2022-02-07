@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using GringottsBank.Api.Extensions;
-using GringottsBank.Application.Models.Account;
 using GringottsBank.Application.Models.Customer;
 using GringottsBank.Application.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;

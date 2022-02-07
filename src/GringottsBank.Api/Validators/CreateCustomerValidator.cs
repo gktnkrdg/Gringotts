@@ -1,7 +1,7 @@
 using FluentValidation;
 using GringottsBank.Application.Models.Customer;
 
-namespace GringottsBank.Application.Validators
+namespace GringottsBank.Api.Validators
 {
 
     public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
@@ -11,24 +11,24 @@ namespace GringottsBank.Application.Validators
             RuleFor(p => p.Email)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Email adresi boş olamaz.")
-                .EmailAddress().WithMessage("Geçerli email adresi giriniz");
+                .WithMessage("Email address cannot be empty.")
+                .EmailAddress().WithMessage("Please enter valid email address");
 
             RuleFor(p => p.Password)
                 .NotEmpty()
-                .WithMessage("Parola boş olamaz.")
+                .WithMessage("Password cannot be empty.")
                 .MinimumLength(6)
-                .WithMessage("Parola minimum 6 karakter olabilir.");
+                .WithMessage("Password length must be minimum 6.");
 
             RuleFor(p => p.FirstName)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Ad bilgisi boş olamaz.");
+                .WithMessage("First name cannot be empty.");
             
             RuleFor(p => p.LastName)
                 .NotNull()
                 .NotEmpty()
-                .WithMessage("Soyad bilgisi boş olamaz.");
+                .WithMessage("Lastname cannot be empty");
          
            
 

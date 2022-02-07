@@ -40,8 +40,7 @@ namespace GringottsBank.Application.Services.Implementations
                 }).ToList()
             };
         }
-
-
+        
         public async Task<BankAccountTransactionsResponse> GetAccountTransactions(Guid customerId, Guid bankAccountId)
         {
             var transactions = _dbContext.Transactions.Include(c => c.BankAccount).Where(c =>
