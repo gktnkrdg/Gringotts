@@ -5,10 +5,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
-COPY ["GringottsBank.Api/GringottsBank.Api.csproj", "GringottsBank.Api/"]
+COPY ["src/GringottsBank.Api/GringottsBank.Api.csproj", "GringottsBank.Api/"]
 RUN dotnet restore "GringottsBank.Api/GringottsBank.Api.csproj"
 COPY . .
-WORKDIR "/src/GringottsBank.Api"
+WORKDIR "/src/src/GringottsBank.Api"
 RUN dotnet build "GringottsBank.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
