@@ -1,5 +1,8 @@
 name: api-deployment
-
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build_gringotts-api:
