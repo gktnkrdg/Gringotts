@@ -5,8 +5,9 @@ on:
       - main
 env:
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-  HEROKU_APP_NAME: ${{ 'gringotts-api' }}
-  HEROKU_EMAIL: ${{ 'gktnkrdg@gmail.com' }}  
+  APP_NAME: ${{ 'gringotts-api' }}
+  HEROKU_REGISTRY_IMAGE: registry.heroku.com/${APP_NAME}/web
+  
 
 jobs:
   build:
@@ -14,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{env.HEROKU_API_KEY}}
-          heroku_app_name: ${{env.HEROKU_APP_NAME}}
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          usedocker: true
+      - name: Heroku Deploy
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          heroku container:login
+          docker build --tag ${{ env.HEROKU_REGISTRY_IMAGE }}:latest .
+          docker push ${{ env.HEROKU_REGISTRY_IMAGE }}:latest
+          heroku container:release -a ${{ env.APP_NAME }} web
