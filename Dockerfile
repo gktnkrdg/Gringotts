@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
 WORKDIR /app
 EXPOSE 80
+EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
@@ -15,9 +16,6 @@ RUN dotnet publish "GringottsBank.Api.csproj" -c Release -o /app/publish
 
 WORKDIR /app
 COPY --from=publish /app/publish .
-##local
-##ENTRYPOINT ["dotnet", "GringottsBank.Api.dll"]
+ENTRYPOINT ["dotnet", "GringottsBank.Api.dll"]
 
-## heroku uses the following
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet ringottsBank.Api.dll
 
