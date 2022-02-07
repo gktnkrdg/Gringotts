@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0-focal AS build
 WORKDIR /src
-COPY ["GringottsBank.Api/GringottsBank.Api.csproj", "GringottsBank.Api/GringottsBank.Api/"]
+COPY ["GringottsBank.Api/GringottsBank.Api.csproj", "GringottsBank.Api/"]
 RUN dotnet restore "GringottsBank.Api/GringottsBank.Api.csproj"
 COPY . .
 WORKDIR "/src/GringottsBank.Api"
