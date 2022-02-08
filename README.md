@@ -4,7 +4,7 @@
 ![Heroku deployment](https://github.com/gktnkrdg/Gringotts/actions/workflows/heroku-deploy.yaml/badge.svg)
 ## Description
 
-GringottsApi is .NET 5 Web API. PostgreSQL is used as database, provided by Heroku. EFCore is used as ORM. Implement optimistic concurency(Concurency Token, xmin) for transaction consistency. Endpoints secured with bearer authentication.
+GringottsApi is .NET 5 Web API. PostgreSQL is used as database, provided by Heroku. EFCore is used as ORM. Optimistic concurency(Concurency Token,xmin) is used for transaction consistency. Endpoints secured with bearer authentication.
 
 
 ## Tech
