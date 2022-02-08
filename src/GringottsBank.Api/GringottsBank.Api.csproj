@@ -6,26 +6,26 @@
 
     <ItemGroup>
 
-        <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6" />
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
-        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13" />
-      
+        <PackageReference Include="FluentValidation.AspNetCore" Version="10.3.6"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.13"/>
+
 
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.13"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.13">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      
-        <ProjectReference Include="..\GringottsBank.Application\GringottsBank.Application.csproj" />
-        <ProjectReference Include="..\GringottsBank.Data\GringottsBank.Data.csproj" />
+
+        <ProjectReference Include="..\GringottsBank.Application\GringottsBank.Application.csproj"/>
+        <ProjectReference Include="..\GringottsBank.Data\GringottsBank.Data.csproj"/>
     </ItemGroup>
 
 </Project>

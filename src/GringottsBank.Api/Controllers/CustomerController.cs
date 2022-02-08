@@ -28,8 +28,10 @@ namespace GringottsBank.Api.Controllers
         public async Task<IActionResult> CreateUser([FromBody] CreateCustomerCommand createUser)
         {
             var createUserResult = await _customerService.CreateCustomer(createUser);
+            
             if (createUserResult.Success)
                 return Created("", createUserResult.Data);
+            
             return BadRequest(createUserResult.Message);
         }
 
@@ -43,11 +45,8 @@ namespace GringottsBank.Api.Controllers
             var customerId = HttpContext.User.CustomerId();
             var userResult = await _customerService.GetCustomer(customerId);
 
-            if (userResult == null)
-            {
+            if (userResult == null) 
                 return NotFound();
-            }
-
             return Ok(userResult);
         }
     }

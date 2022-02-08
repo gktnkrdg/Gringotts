@@ -53,5 +53,4 @@ namespace GringottsBank.Application.Services.Implementations
             }));
         }
     }
-
 }

@@ -23,33 +23,37 @@ namespace GringottsBank.Application.Services.Implementations
         {
             var customer = _dbContext.Customers.FirstOrDefault(c => c.Email == createCustomerCommand.Email);
             if (customer != null)
-                return new ResultModel<CreateUserResponse>()
+            {
+                return new ResultModel<CreateUserResponse>
                 {
-                    Data = null,
-                    Message = "Daha önce kayıtlı email adresiyle tekrar kayıt olamazsınız.",
+                    Message = "Email address already registered. Please check again",
                     Success = false
                 };
-            customer = new Customer()
+            }
+
+            customer = new Customer
             {
                 Email = createCustomerCommand.Email,
-                Password = createCustomerCommand.Password, //todo hash,
+                Password = createCustomerCommand.Password, //todo hashing,
                 CreatedDate = DateTime.Now,
                 FirstName = createCustomerCommand.FirstName,
                 LastName = createCustomerCommand.LastName,
-                PhoneNumber = createCustomerCommand.PhoneNumber
+                IsActive = true
             };
+
             _dbContext.Customers.Add(customer);
             await _dbContext.SaveChangesAsync();
-            return new ResultModel<CreateUserResponse>()
+
+            return new ResultModel<CreateUserResponse>
             {
-                Data = new CreateUserResponse() { CustomerId = customer.Id },
+                Data = new CreateUserResponse { CustomerId = customer.Id },
                 Success = true
             };
         }
 
         public async Task<CustomerResponse> GetCustomer(Guid customerId)
         {
-            return await _dbContext.Customers.Where(c => c.Id == customerId).Select(c => new CustomerResponse()
+            return await _dbContext.Customers.Where(c => c.Id == customerId).Select(c => new CustomerResponse
             {
                 Email = c.Email,
                 CustomerId = c.Id,
@@ -59,22 +63,23 @@ namespace GringottsBank.Application.Services.Implementations
         }
 
 
-        public async Task<ResultModel<CheckCustomerLoginResponse>> CheckCustomerLogin(string email,string password)
+        public async Task<ResultModel<CheckCustomerLoginResponse>> CheckCustomerLogin(string email, string password)
         {
             var customerLoginResult = await _dbContext.Customers.Where(c => c.Email == email && c.Password == password)
                 .FirstOrDefaultAsync();
+
             if (customerLoginResult == null)
             {
                 return new ResultModel<CheckCustomerLoginResponse>
                 {
-                    Data = null,
                     Success = false,
-                    Message = "Geçersiz login bilgisi",
+                    Message = "Invalid login information. Check email and password"
                 };
             }
+
             return new ResultModel<CheckCustomerLoginResponse>
             {
-                Data =  new CheckCustomerLoginResponse(){ CustomerId = customerLoginResult.Id},
+                Data = new CheckCustomerLoginResponse { CustomerId = customerLoginResult.Id },
                 Success = true
             };
         }

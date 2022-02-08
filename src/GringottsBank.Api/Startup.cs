@@ -34,9 +34,9 @@ namespace GringottsBank.Api
         {
             services.AddControllers().AddFluentValidation();
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            
-            services.AddTransient<IValidator<CreateCustomerCommand>,CreateCustomerValidator>();
-            services.AddTransient<IValidator<CreateBankAccountCommand>,CreateBankAccountValidator >();
+
+            services.AddTransient<IValidator<CreateCustomerCommand>, CreateCustomerValidator>();
+            services.AddTransient<IValidator<CreateBankAccountCommand>, CreateBankAccountValidator>();
             services.AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -47,68 +47,65 @@ namespace GringottsBank.Api
                 {
                     options.SaveToken = true;
                     options.RequireHttpsMetadata = false;
-                    options.TokenValidationParameters = new TokenValidationParameters()
+                    options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = true,
                         ValidateAudience = true,
                         ValidAudience = Configuration["JWT:ValidAudience"],
                         ValidIssuer = Configuration["JWT:ValidIssuer"],
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
+                        IssuerSigningKey =
+                            new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:SecretKey"]))
                     };
                 });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GringottsBank", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
-                    In = ParameterLocation.Header, 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
                     Description = "Please insert JWT with Bearer into field",
                     Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey 
+                    Type = SecuritySchemeType.ApiKey
                 });
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
-                    { 
-                        new OpenApiSecurityScheme 
-                        { 
-                            Reference = new OpenApiReference 
-                            { 
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
                                 Type = ReferenceType.SecurityScheme,
-                                Id = "Bearer" 
-                            } 
+                                Id = "Bearer"
+                            }
                         },
-                        new string[] { } 
-                    } 
+                        new string[] { }
+                    }
                 });
             });
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<GringottsBankDbContext>(opt =>
                 {
                     opt.UseNpgsql(Configuration.GetConnectionString("BankConnection"),
-                        conn => conn.CommandTimeout(TimeSpan.FromSeconds(10).Seconds));
+                        conn => conn.CommandTimeout(TimeSpan.FromSeconds(15).Seconds));
                     opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
                 });
             services.RegisterServices();
-           
         }
 
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-              
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GringottsBank v1"));
             //app.UseHttpsRedirection();
 
             app.UseRouting();
             app.ConfigureExceptionHandler();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
-
-  
 }

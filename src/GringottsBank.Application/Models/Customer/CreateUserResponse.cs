@@ -6,5 +6,4 @@ namespace GringottsBank.Application.Models.Customer
     {
         public Guid CustomerId { get; set; }
     }
-   
 }

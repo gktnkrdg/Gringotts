@@ -19,7 +19,6 @@ namespace GringottsBank.Api.Middleware
             {
                 appError.Run(async context =>
                 {
-
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     context.Response.ContentType = "application/json";
 
@@ -27,9 +26,10 @@ namespace GringottsBank.Api.Middleware
 
                     if (contextFeature != null)
                     {
-                        await logger.LogInformation(contextFeature.Error.Message, contextFeature.Error, httpStatusCode: (HttpStatusCode)context.Response.StatusCode, logLevel: LogLevel.Error);
+                        await logger.LogInformation(contextFeature.Error.Message, contextFeature.Error,
+                            httpStatusCode: (HttpStatusCode)context.Response.StatusCode, logLevel: LogLevel.Error);
 
-                        await context.Response.WriteAsync(new ErrorDetails()
+                        await context.Response.WriteAsync(new ErrorDetails
                         {
                             StatusCode = context.Response.StatusCode,
                             Message = contextFeature.Error.Message
@@ -39,7 +39,6 @@ namespace GringottsBank.Api.Middleware
             });
         }
     }
-
 
     public class ErrorDetails
     {
@@ -51,5 +50,4 @@ namespace GringottsBank.Api.Middleware
             return JsonConvert.SerializeObject(this);
         }
     }
-    
 }

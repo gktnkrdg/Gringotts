@@ -3,7 +3,6 @@ using GringottsBank.Application.Models.Customer;
 
 namespace GringottsBank.Api.Validators
 {
-
     public class CreateCustomerValidator : AbstractValidator<CreateCustomerCommand>
     {
         public CreateCustomerValidator()
@@ -24,14 +23,11 @@ namespace GringottsBank.Api.Validators
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("First name cannot be empty.");
-            
+
             RuleFor(p => p.LastName)
                 .NotNull()
                 .NotEmpty()
                 .WithMessage("Lastname cannot be empty");
-         
-           
-
         }
     }
 }

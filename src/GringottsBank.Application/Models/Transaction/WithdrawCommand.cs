@@ -4,5 +4,4 @@ namespace GringottsBank.Application.Models.Transaction
     {
         public decimal Amount { get; set; }
     }
-  
 }

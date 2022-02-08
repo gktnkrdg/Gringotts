@@ -9,15 +9,13 @@ namespace GringottsBank.Application.Models.Transaction
         public Guid CustomerId { get; set; }
         public List<CustomerTransaction> Transactions { get; set; }
     }
-    
+
     public class CustomerTransaction
     {
-        public TransactionType TransactionType { get; set; }
+        public string TransactionType { get; set; }
         public decimal Amount { get; set; }
         public DateTime CreateDate { get; set; }
         public string AccountName { get; set; }
         public Guid AccountId { get; set; }
     }
-
-  
 }

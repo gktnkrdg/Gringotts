@@ -19,24 +19,23 @@ namespace GringottsBank.Api.Handlers
 
         public TokenResponse CreateToken(Guid customerId)
         {
-            TokenResponse token = new TokenResponse();
-            SymmetricSecurityKey symmetricSecurityKey =
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]))
-                ;
-            SigningCredentials credentials =
+            var token = new TokenResponse();
+            var symmetricSecurityKey =
+                new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]));
+
+            var credentials =
                 new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
 
-            JwtSecurityToken securityToken = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidAudience"],
-                audience: _configuration["Token:ValidAudience"],
+            var securityToken = new JwtSecurityToken(
+                _configuration["JWT:ValidAudience"],
+                _configuration["JWT:ValidAudience"],
                 expires: DateTime.Now.AddHours(6),
-                notBefore: DateTime.Now,
                 signingCredentials: credentials,
-                claims: new Claim[]{new Claim("CustomerId", customerId.ToString())}
+                claims: new[] { new Claim("CustomerId", customerId.ToString()) }
             );
 
-            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
+            var handler = new JwtSecurityTokenHandler();
             token.Token = handler.WriteToken(securityToken);
             return token;
         }

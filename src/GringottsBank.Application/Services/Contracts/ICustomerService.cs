@@ -9,7 +9,6 @@ namespace GringottsBank.Application.Services.Contracts
     {
         public Task<ResultModel<CreateUserResponse>> CreateCustomer(CreateCustomerCommand createCustomerCommand);
         public Task<CustomerResponse> GetCustomer(Guid customerId);
-
-        public Task<ResultModel<CheckCustomerLoginResponse>> CheckCustomerLogin(string email,string password);
+        public Task<ResultModel<CheckCustomerLoginResponse>> CheckCustomerLogin(string email, string password);
     }
 }

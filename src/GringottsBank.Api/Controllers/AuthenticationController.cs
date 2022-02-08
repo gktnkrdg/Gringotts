@@ -29,13 +29,14 @@ namespace GringottsBank.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginCommand request)
         {
             var customerLoginResult = await _customerService.CheckCustomerLogin(request.Email, request.Password);
-            if(!customerLoginResult.Success  || customerLoginResult.Data == null || customerLoginResult.Data.CustomerId == Guid.Empty )
+            if (!customerLoginResult.Success || customerLoginResult.Data == null ||
+                customerLoginResult.Data.CustomerId == Guid.Empty)
                 return BadRequest(customerLoginResult.Message);
-            
+
             var tokenResult = _tokenHandler.CreateToken(customerLoginResult.Data.CustomerId);
-            if (tokenResult?.Token == null)
+            if (string.IsNullOrEmpty(tokenResult.Token))
                 return BadRequest();
-            
+
             return Ok(tokenResult.Token);
         }
     }

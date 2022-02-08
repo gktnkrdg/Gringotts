@@ -5,7 +5,9 @@ namespace GringottsBank.Data
 {
     public class GringottsBankDbContext : DbContext
     {
-        public GringottsBankDbContext(DbContextOptions<GringottsBankDbContext> options) : base(options) { }
+        public GringottsBankDbContext(DbContextOptions<GringottsBankDbContext> options) : base(options)
+        {
+        }
 
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<Customer> Customers { get; set; }
@@ -26,8 +28,8 @@ namespace GringottsBank.Data
                     .ValueGeneratedOnAddOrUpdate()
                     .IsConcurrencyToken();
             });
-            
-                 
+
+
             modelBuilder.Entity<Transaction>(b =>
             {
                 b.HasOne(c => c.BankAccount).WithMany(c => c.Transactions);
